@@ -35,7 +35,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.cloud:spring-cloud-starter')
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-dependencies', version: 'Finchley.SR1', ext: 'pom'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-dependencies', version: springCloudVersion, ext: 'pom'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-config', version: '2.0.0.M1'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-eureka', version: '2.0.0.M1'
     compile('org.projectlombok:lombok:1.18.2',
