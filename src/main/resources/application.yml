@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: development
+#客户端访问端口
+server:
+  port: 8081
+  compression:
+    enabled: true
 management:
   endpoints:
     web:
@@ -9,16 +14,26 @@ management:
   endpoint:
     health:
       show-details: always
+mybatis:
+  config-location: classpath:/mybatis.cfg.xml    # mybatis配置文件所在路径
+  type-aliases-package: io.omnidata.odmpapi.entity           # 定义所有操作类的别名所在包
+  mapper-locations: classpath*:/mapper/*.xml
 ---
 spring:
   profiles: development
   application:
     name: api-provider
-#eureka客户端
-server:
-  port: 8762
+  datasource:
+    url: jdbc:h2:mem:odmp;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;INIT=CREATE SCHEMA IF NOT EXISTS odmp\;SET SCHEMA odmp
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /console
 eureka:
-# 定义了renews 和renews threshold的比值，默认值为0.85,本地设置0.49
+  # 定义了renews 和renews threshold的比值，默认值为0.85,本地设置0.49
   server:
     renewalPercentThreshold: 0.85
   instance:
@@ -31,3 +46,18 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+logging:
+  path: .
+  file: output.log
+---
+spring:
+  profiles: testing
+logging:
+  path: /home/app/odmp/log
+  file: output.log
+---
+spring:
+  profiles: production
+logging:
+  path: /home/app/odmp/log
+  file: output.log
