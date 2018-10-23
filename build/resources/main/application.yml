@@ -1,0 +1,33 @@
+spring:
+  profiles:
+    active: development
+server:
+  port: 8080
+  compression:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+---
+spring:
+  profiles: development
+logging:
+  path: .
+  file: output.log
+---
+spring:
+  profiles: testing
+logging:
+  path: /home/app/odmp/log
+  file: output.log
+---
+spring:
+  profiles: production
+logging:
+  path: /home/app/odmp/log
+  file: output.log
